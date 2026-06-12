@@ -17,7 +17,7 @@ public:
 };
 
 Node* buildTree(vector<int> preorderArray, int &idx){
-    idx++;
+    idx++; // Time complexity: O(n)
     if(preorderArray[idx]==-1) return NULL;
     
     Node* root = new Node(preorderArray[idx]);
@@ -26,21 +26,21 @@ Node* buildTree(vector<int> preorderArray, int &idx){
     return root;
 }
 
-void preorder(Node* root){
+void preorder(Node* root){ // Time complexity: O(n)
     if(root==NULL) return;
     cout << root->data << " ";
     preorder(root->left);
     preorder(root->right);
 }
 
-void inorder(Node* root){
+void inorder(Node* root){ // Time complexity: O(n)
     if(root==NULL) return;
     inorder(root->left);
     cout << root->data << " ";
     inorder(root->right);
 }
 
-void postorder(Node* root){
+void postorder(Node* root){ // Time complexity: O(n)
     if(root==NULL) return;
     postorder(root->left);
     postorder(root->right);
@@ -57,6 +57,8 @@ void levelorder(Node* root){
             q.push(NULL);
             q.pop();
             continue;
+        }else if(q.front()==NULL && q.size()==1){
+            break;
         }
         if(q.front()->left!=NULL){
             q.push(q.front()->left);
@@ -69,7 +71,7 @@ void levelorder(Node* root){
     }
 }
 
-int main(){
+int main(){ 
     vector<int> preorderArray = {1,2,-1,-1,3,4,-1,-1,5,-1,-1};
     
     int idx = -1;
