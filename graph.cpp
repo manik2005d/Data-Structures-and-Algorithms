@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <queue>
 #include <list>
 using namespace std;
 
@@ -17,14 +19,22 @@ public:
         l[v].push_back(u);
     }
 
-    void printAdjList(){
-        for (int i=0;i<V;i++){
-            cout << i << " : ";
-            for (int neighb : l[i]){
-                cout << neighb << " ";
+    void bfs() {
+        queue<int> q;
+        vector<bool> visited(V, false);
+        q.push(0);
+        visited[0] = true;
+        while(q.size()>0){
+            cout << q.front() << " ";
+            for (int x : l[q.front()]){
+                if(!visited[x]){
+                    visited[x] = true;
+                    q.push(x);
+                }
             }
-            cout << endl;
+            q.pop();
         }
+        cout << endl;
     }
 };
 
@@ -36,6 +46,6 @@ int main(){
     g.addEdge(2,3);
     g.addEdge(2,4);
 
-    g.printAdjList();
+    g.bfs();
     return 0;
 }
