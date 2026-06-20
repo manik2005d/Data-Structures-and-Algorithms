@@ -36,6 +36,21 @@ public:
         }
         cout << endl;
     }
+
+    void dfsHelper(vector<bool> &visited, int i){
+        cout << i << " ";
+        visited[i] = true;
+        for (int x : l[i]){
+            if(!visited[x]){
+                dfsHelper(visited, x);
+            }
+        }
+    }
+    void dfs() {
+        vector<bool> visited(V, false);
+        dfsHelper(visited, 0);
+        cout << endl;
+    }
 };
 
 int main(){
@@ -43,9 +58,9 @@ int main(){
     g.addEdge(0,1);
     g.addEdge(1,2);
     g.addEdge(1,3);
-    g.addEdge(2,3);
     g.addEdge(2,4);
 
     g.bfs();
+    g.dfs();
     return 0;
 }
