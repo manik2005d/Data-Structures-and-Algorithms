@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 #include <list>
 using namespace std;
 
@@ -44,6 +45,29 @@ public:
         }
         return false;
     }
+
+    bool isCycleBFS(){
+        queue<pair<int, int>> q;
+        vector<bool> visited(V, false);
+        q.push({0,-1});
+        visited[0] = true;
+        while(q.size()>0){
+            int curr = q.front().first;
+            int parent = q.front().second;
+            q.pop();
+            for (int u : l[curr]){
+                if(!visited[u]){
+                    visited[u] = true;
+                    q.push({u, curr});
+                }else{
+                    if(u!=parent){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 };
 
 int main(){
@@ -54,5 +78,6 @@ int main(){
     g.addedge(1,2);
     g.addedge(3,4);
 
-    cout << g.isCycleDFS();
+    cout << g.isCycleDFS() << endl;
+    cout << g.isCycleBFS() << endl;
 }
