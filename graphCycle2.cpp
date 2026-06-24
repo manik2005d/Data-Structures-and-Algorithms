@@ -83,6 +83,5 @@ int main(){
     g.addedge(0,2);
     g.addedge(2,3);
     g.addedge(3,0);
-
     cout << g.isCycleBFS() << endl;
 }
