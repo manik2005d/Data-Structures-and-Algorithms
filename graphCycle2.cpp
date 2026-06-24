@@ -47,6 +47,34 @@ public:
         }
         return false;
     }
+
+    bool isCycleBFS(){
+        vector<int> indegree(V, 0);
+        for (int i=0;i<V;i++){
+            for (int j : l[i]){
+                indegree[j]++;
+            }
+        }
+        queue<int> q;
+        for (int i=0;i<V;i++){
+            if(indegree[i]==0){
+                q.push(i);
+            }
+        }
+        int count = 0;
+        while(q.size()>0){
+            int curr = q.front();
+            q.pop();
+            count++;
+            for (int u : l[curr]){
+                indegree[u]--;
+                if(indegree[u]==0){
+                    q.push(u);
+                }
+            }
+        }
+        return count!=V;
+    }
 };
 
 int main(){
@@ -56,5 +84,5 @@ int main(){
     g.addedge(2,3);
     g.addedge(3,0);
 
-    cout << g.isCycleDFS() << endl;
+    cout << g.isCycleBFS() << endl;
 }
