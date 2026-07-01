@@ -27,6 +27,15 @@ void bellmanFord(int src, vector<vector<Edge>> g, int V){
         }
     }
 
+    for (int u=0;u<V;u++){
+        for (Edge e : g[u]){
+            if(dist[u]!=INT_MAX && dist[e.v]>dist[u]+e.wt){
+                cout << "Negative cycle detected" << endl;
+                return;
+            }
+        }
+    }
+
     for (int i=0;i<V;i++){
         cout << i << " : " << dist[i] << endl;
     }
